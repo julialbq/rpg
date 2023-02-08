@@ -15,6 +15,23 @@ handleLife,
 characterClass,
 handleClass}) => {
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    const elements = event.target.elements
+    const formValues = {
+      name: elements.name.value,
+      lastName: elements.lastName.value,
+      xp: elements.xp.value,
+      level: elements.level.value,
+      life: elements.life.value,
+      characterClass: elements.characterClass.value
+    }
+
+    window.localStorage.setItem('rpg_form', JSON.stringify(formValues))
+  }
+
+ 
   return (
     <div>
       <form onSubmit={handleSubmit}>
