@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react"
+
 const classes = ['artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard']
 
 export const RpgForm = ({name, 
@@ -15,6 +17,14 @@ handleLife,
 characterClass,
 handleClass}) => {
 
+  const [maxLifePoints, setMaxLifePoints] = useState(0) //useeffect acho...
+
+  useMemo(() => {
+    const newMaxLifePoints = level * 10
+    setMaxLifePoints(newMaxLifePoints)
+    return maxLifePoints
+  }, [level])
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -31,7 +41,7 @@ handleClass}) => {
     window.localStorage.setItem('rpg_form', JSON.stringify(formValues))
   }
 
- 
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -45,19 +55,19 @@ handleClass}) => {
         </label>
         <label name='level'>
           Level:
-          <input type='number' id='level' placeholder="Level" value={level} onChange={handleLevel}/>
+          <input type='number' min={0} id='level' placeholder="Level" value={level} onChange={handleLevel}/>
         </label>
         <label name='xp'>
           XP:
-          <input type='number' id='xp' placeholder="XP" value={xp} onChange={handleXp}/>
+          <input type='number' min={0} id='xp' placeholder="XP" value={xp} onChange={handleXp}/>
         </label>
         <label name='life'>
           Life:
-          <input type='number' id='life' placeholder="Life" value={life} onChange={handleLife}/>
+          <input type='number' max={maxLifePoints} min={0} id='life' placeholder="Life" value={life} onChange={handleLife}/>
         </label>
         <label name='mana'>
           Mana:
-          <input type='number' id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
+          <input type='number' min={0} id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
         </label>
         <label name='characterClass'>
           Class:
