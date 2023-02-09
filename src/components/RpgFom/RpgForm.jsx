@@ -96,7 +96,7 @@ resetFormValues
         </label>
         <button type="submit">Save</button> 
         <button onClick={(event) => confirmReset(event)}>Reset</button> 
-        {confirm == true &&
+        {confirm === true &&
           <>
             <p>Are you sure you want to reset the form and data?</p>
             <button onClick={(event) => {
