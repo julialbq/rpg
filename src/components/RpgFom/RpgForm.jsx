@@ -1,3 +1,4 @@
+import './RpgForm.css'
 import { useMemo, useState } from "react"
 
 const classes = ['artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard']
@@ -15,9 +16,15 @@ handleMana,
 life,
 handleLife,
 characterClass,
-handleClass}) => {
+handleClass,
+formValues,
+setFormValues,
+resetFormValues
+}) => {
 
-  const [maxLifePoints, setMaxLifePoints] = useState(0) //useeffect acho...
+  const [maxLifePoints, setMaxLifePoints] = useState(0)
+  const [maxManaPoints, setMaxManaPoints] = useState(0)
+  const [confirm, setConfirm] = useState(false)
 
   useMemo(() => {
     const newMaxLifePoints = level * 10
@@ -25,11 +32,18 @@ handleClass}) => {
     return maxLifePoints
   }, [level])
 
+  useMemo(() => {
+    const newMaxManaPoints = (+level * 2) + +xp
+    setMaxManaPoints(newMaxManaPoints)
+    return maxManaPoints
+  }, [level, xp])
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
     const elements = event.target.elements
-    const formValues = {
+
+    formValues = {
       name: elements.name.value,
       lastName: elements.lastName.value,
       xp: elements.xp.value,
@@ -38,15 +52,19 @@ handleClass}) => {
       characterClass: elements.characterClass.value
     }
 
-    window.localStorage.setItem('rpg_form', JSON.stringify(formValues))
+    setFormValues(formValues)
   }
 
+  const confirmReset = (event) => {   
+    event.preventDefault()
+    setConfirm(true)
+  }
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label name='name'>
-          Name:
+          Name: 
         <input id='name' placeholder="Name" value={name} onChange={handleName}/>
         </label>
         <label name='lastName'>
@@ -67,7 +85,7 @@ handleClass}) => {
         </label>
         <label name='mana'>
           Mana:
-          <input type='number' min={0} id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
+          <input type='number' max={maxManaPoints} min={0} id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
         </label>
         <label name='characterClass'>
           Class:
@@ -76,7 +94,22 @@ handleClass}) => {
             {classes.map((characterClass) => <option key={characterClass} value={characterClass}>{characterClass}</option>)}
           </select>
         </label>
-        <button type="submit">Save</button>     
+        <button type="submit">Save</button> 
+        <button onClick={(event) => confirmReset(event)}>Reset</button> 
+        {confirm == true &&
+          <>
+            <p>Are you sure you want to reset the form and data?</p>
+            <button onClick={(event) => {
+              event.preventDefault()
+              resetFormValues(formValues)
+              setConfirm(false)
+            }}>Yes</button>
+            <button onClick={(event) => {
+              event.preventDefault()
+              setConfirm(false)
+            }} >Cancel</button>
+          </>
+        }
       </form>
     </div>
   )
