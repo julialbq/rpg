@@ -24,7 +24,7 @@
   padding: 5px;
 }
 
-.form button {
+.reset, .save {
  background-color: saddlebrown;
  color: antiquewhite;
  cursor: pointer;
@@ -32,4 +32,23 @@
 
 .form button:hover {
   opacity: 0.8;
+}
+
+.form-section {
+  display: flex;
+  gap: 16px;
+}
+
+.confirm-btn {
+  background-color: antiquewhite;
+  color: saddlebrown;
+  border: 1px solid saddlebrown;
+  cursor: pointer;
+}
+
+.btn-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }

@@ -63,6 +63,7 @@ resetFormValues
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
+        <div className="form-section">
         <label name='name'>
           Name: 
         <input id='name' placeholder="Name" value={name} onChange={handleName}/>
@@ -71,6 +72,8 @@ resetFormValues
           Last name:
           <input id='lastName' placeholder="Last name" value={lastName} onChange={handleLastName}/>
         </label>
+        </div>
+        <div className="form-section">
         <label name='level'>
           Level:
           <input type='number' min={0} id='level' placeholder="Level" value={level} onChange={handleLevel}/>
@@ -79,6 +82,8 @@ resetFormValues
           XP:
           <input type='number' min={0} id='xp' placeholder="XP" value={xp} onChange={handleXp}/>
         </label>
+        </div>
+        <div className="form-section">
         <label name='life'>
           Life:
           <input type='number' max={maxLifePoints} min={0} id='life' placeholder="Life" value={life} onChange={handleLife}/>
@@ -86,7 +91,8 @@ resetFormValues
         <label name='mana'>
           Mana:
           <input type='number' max={maxManaPoints} min={0} id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
-        </label>
+        </label>          
+        </div>
         <label name='characterClass'>
           Class:
           <select name="characterClass" id="characterClass" value={characterClass} onChange={handleClass}>
@@ -94,20 +100,22 @@ resetFormValues
             {classes.map((characterClass) => <option key={characterClass} value={characterClass}>{characterClass}</option>)}
           </select>
         </label>
-        <button type="submit">Save</button> 
-        <button onClick={(event) => confirmReset(event)}>Reset</button> 
+        <button className='save' type="submit">Save</button> 
+        <button className='reset' onClick={(event) => confirmReset(event)}>Reset</button> 
         {confirm === true &&
           <>
             <p>Are you sure you want to reset the form and data?</p>
-            <button onClick={(event) => {
+            <div className="btn-options">
+            <button className='reset' onClick={(event) => {
               event.preventDefault()
               resetFormValues(formValues)
               setConfirm(false)
             }}>Yes</button>
-            <button onClick={(event) => {
+            <button className='confirm-btn' onClick={(event) => {
               event.preventDefault()
               setConfirm(false)
             }} >Cancel</button>
+            </div>
           </>
         }
       </form>
