@@ -1,4 +1,12 @@
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form {
+  width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,6 +14,8 @@
   gap: 16px;
   margin-top: 150px;
   margin-bottom: 50px;
+  padding: 16px;
+  border-radius: 8px;
 }
 
 .form label {
@@ -22,6 +32,11 @@
   border: 1px solid saddlebrown;
   border-radius: 4px;
   padding: 5px;
+}
+
+.form input:focus {
+  color: saddlebrown;
+  font-weight: bold;
 }
 
 .reset, .save {

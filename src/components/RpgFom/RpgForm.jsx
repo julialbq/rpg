@@ -1,5 +1,6 @@
 import './RpgForm.css'
 import { useMemo, useState } from "react"
+import { classColors } from '../../constants/classColors'
 
 const classes = ['artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard']
 
@@ -68,8 +69,8 @@ resetFormValues
   }
 
   return (
-    <div>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className='form-wrapper'>
+      <form className="form" onSubmit={handleSubmit} style={{border: `5px solid ${classColors[characterClass]}` }} >
         <div className="form-section">
         <label name='name'>
           Name: 
