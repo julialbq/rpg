@@ -60,6 +60,13 @@ resetFormValues
     setConfirm(true)
   }
 
+  const resetAll = (event) => {
+    event.preventDefault()
+
+    resetFormValues(formValues)
+    setConfirm(false)
+  }
+
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
@@ -106,11 +113,7 @@ resetFormValues
           <>
             <p>Are you sure you want to reset the form and data?</p>
             <div className="btn-options">
-            <button className='reset' onClick={(event) => {
-              event.preventDefault()
-              resetFormValues(formValues)
-              setConfirm(false)
-            }}>Yes</button>
+            <button className='reset' onClick={(event) => {resetAll(event)}}>Yes</button>
             <button className='confirm-btn' onClick={(event) => {
               event.preventDefault()
               setConfirm(false)
