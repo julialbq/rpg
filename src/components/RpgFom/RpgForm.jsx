@@ -12,10 +12,6 @@ xp,
 handleXp,
 level,
 handleLevel,
-mana,
-handleMana,
-life,
-handleLife,
 characterClass,
 handleClass,
 handleSubmit,
@@ -24,16 +20,6 @@ setConfirm,
 confirmReset,
 resetAll
 }) => {
-
-  const maxLifePoints = useMemo(() => {
-    const newMaxLifePoints = level * 10    
-    return newMaxLifePoints
-  }, [level])
-
-  const maxManaPoints = useMemo(() => {
-    const newMaxManaPoints = (+level * 2) + +xp    
-    return newMaxManaPoints
-  }, [level, xp])
 
   return (
     <div className='form-wrapper'>
@@ -59,14 +45,6 @@ resetAll
         </label>
         </div>
         <div className="form-section">
-        <label name='life'>
-          Life:
-          <input type='number' max={maxLifePoints} min={0} id='life' placeholder="Life" value={life} onChange={handleLife}/>
-        </label>
-        <label name='mana'>
-          Mana:
-          <input type='number' max={maxManaPoints} min={0} id='mana' placeholder="Mana" value={mana} onChange={handleMana}/>
-        </label>          
         </div>
         <label name='characterClass'>
           Class:
@@ -81,11 +59,11 @@ resetAll
           <>
             <p>Are you sure you want to reset the form and data?</p>
             <div className="btn-options">
-            <button className='reset' onClick={(event) => {resetAll(event)}}>Yes</button>
-            <button className='confirm-btn' onClick={(event) => {
-              event.preventDefault()
-              setConfirm(false)
-            }} >Cancel</button>
+              <button className='reset' onClick={(event) => {resetAll(event)}}>Yes</button>
+              <button className='confirm-btn' onClick={(event) => {
+                event.preventDefault()
+                setConfirm(false)
+              }} >Cancel</button>
             </div>
           </>
         }

@@ -3,7 +3,6 @@ import RPGIcon from './assets/rpg-icon.png'
 import { RpgForm } from './components/RpgFom/RpgForm';
 import { Identification } from './components/Identification/Identification';
 import { Life } from './components/Life/Life';
-import { Level } from './components/Level/Level';
 import { useInput } from './components/CustomHooks/useInput';
 import { useLocalStorage } from './components/CustomHooks/useLocalStorage';
 import { useState } from 'react';
@@ -11,13 +10,12 @@ import { useState } from 'react';
 function App() {
   const [confirm, setConfirm] = useState(false)
   const [formValues, setFormValues] = useState({})
-
+  
   const characterInfo = {
     name: '',
     lastName: '',
     xp: 0,
     level: 0,
-    life: 0,
     characterClass: ''
   }
   const character = useLocalStorage("rpg_form", characterInfo)
@@ -41,19 +39,9 @@ function App() {
   } = useInput(formValues?.xp ?? 0)
 
   const {
-    value: mana,
-    handleInput: handleMana,
-  } = useInput(formValues?.xp ?? 0)
-
-  const {
     value: level,
     setValue: setLevel,
     handleInput: handleLevel,
-  } = useInput(formValues?.xp ?? 0)
-
-  const {
-    value: life,
-    handleInput: handleLife,
   } = useInput(formValues?.xp ?? 0)
 
   const {
@@ -61,7 +49,6 @@ function App() {
     setValue: setCharacterClass,
     handleInput: handleClass,
   } = useInput(formValues?.xp ?? "class")
-
   
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -73,7 +60,6 @@ function App() {
       lastName: elements.lastName.value,
       xp: elements.xp.value,
       level: elements.level.value,
-      life: elements.life.value,
       characterClass: elements.characterClass.value
     }
     
@@ -115,10 +101,6 @@ function App() {
       handleXp={handleXp} 
       level={level} 
       handleLevel={handleLevel}
-      mana={mana} 
-      handleMana={handleMana}
-      life={life} 
-      handleLife={handleLife}
       characterClass={characterClass} 
       handleClass={handleClass}
       formValues={formValues}
@@ -129,8 +111,7 @@ function App() {
       resetAll={resetAll} />
       <Identification name={name} lastName={lastName} characterClass={characterClass} />
       <div className="info">
-        <Life life={life} mana={mana} />
-        <Level level={level} xp={xp} life={life} />
+        <Life level={level} xp={xp} />
       </div>
     </div>
   );
