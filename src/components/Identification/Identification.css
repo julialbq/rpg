@@ -1,0 +1,16 @@
+.identification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.identification h2 {
+  text-align: center;
+  color: saddlebrown;
+}
+
+.identification img {
+  border-radius: 4px;
+  height: 8vh;
+}
