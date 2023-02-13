@@ -1,4 +1,5 @@
 export const classColors = {
+  '': 'transparent',
   artificer: '#626200',
   barbarian: '#FF6666',
   bard: '#B4A7D6',
