@@ -18,55 +18,22 @@ life,
 handleLife,
 characterClass,
 handleClass,
-formValues,
-setFormValues,
-resetFormValues
+handleSubmit,
+confirm,
+setConfirm,
+confirmReset,
+resetAll
 }) => {
 
-  const [maxLifePoints, setMaxLifePoints] = useState(0)
-  const [maxManaPoints, setMaxManaPoints] = useState(0)
-  const [confirm, setConfirm] = useState(false)
-
-  useMemo(() => {
-    const newMaxLifePoints = level * 10
-    setMaxLifePoints(newMaxLifePoints)
-    return maxLifePoints
+  const maxLifePoints = useMemo(() => {
+    const newMaxLifePoints = level * 10    
+    return newMaxLifePoints
   }, [level])
 
-  useMemo(() => {
-    const newMaxManaPoints = (+level * 2) + +xp
-    setMaxManaPoints(newMaxManaPoints)
-    return maxManaPoints
+  const maxManaPoints = useMemo(() => {
+    const newMaxManaPoints = (+level * 2) + +xp    
+    return newMaxManaPoints
   }, [level, xp])
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-
-    const elements = event.target.elements
-
-    formValues = {
-      name: elements.name.value,
-      lastName: elements.lastName.value,
-      xp: elements.xp.value,
-      level: elements.level.value,
-      life: elements.life.value,
-      characterClass: elements.characterClass.value
-    }
-
-    setFormValues(formValues)
-  }
-
-  const confirmReset = (event) => {   
-    event.preventDefault()
-    setConfirm(true)
-  }
-
-  const resetAll = (event) => {
-    event.preventDefault()
-
-    resetFormValues(formValues)
-    setConfirm(false)
-  }
 
   return (
     <div className='form-wrapper'>

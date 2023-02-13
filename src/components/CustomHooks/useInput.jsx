@@ -7,5 +7,5 @@ export const useInput = (initialValue) => {
     setValue(event.target.value)
   }
 
-  return {value, handleInput}
+  return {value, setValue, handleInput}
 }

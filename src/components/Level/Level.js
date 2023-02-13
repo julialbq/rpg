@@ -1,13 +1,10 @@
 import { useMemo, useState } from 'react'
 import './Level.css'
 
-export const Level = ({level, xp, life}) => {
-  const [armor, setArmor] = useState(0)
-  
-  useMemo(() => {
+export const Level = ({level, xp, life}) => { 
+  const armor = useMemo(() => {
     const newArmor = +life + (+level*2) + (+xp+1)
-    setArmor(newArmor)
-    return armor
+    return newArmor
   }, [level, xp, life])
 
   return (
